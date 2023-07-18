@@ -1,0 +1,77 @@
+
+<html>
+  <head>
+    <title>{{title}}</title>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+    <link rel='stylesheet' href='css/{{style}}' />
+  </head>
+  <body>
+    <header class='products_header'>
+      <div class='d-flex justify-content-center align-items-center'>
+        <div class='text-center mt-2'>
+          <div>
+            <p class='font_id mb-1'><span class='fw-bold'>Cart ID: </span> <span id='cartId'>{{cartId}}</span></p>
+          </div>
+          <div class='d-flex align-items-center mb-2'>
+            <h2 class='pe-2'>Productos</h2>
+            <div class='d-flex align-items-center'>
+              <p id='cartQuantity' class='font_id m-0'>
+              </p>
+            </div>
+            <div>
+              <a class='btn btn-dark ms-3' href='#' onclick='redirectToCart()' role='button'>Detalle de carrito</a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </header>
+    <div class='container p-3'>
+      <div class='section'>
+        <div class='row'>
+          {{#each products}}
+            <div class='col-md-4'>
+              <div class='card product-card'>
+                <div class='card-body'>
+                  <h5 class='card-title'>{{title}}</h5>
+                  <p class='card-text'>{{description}}</p>
+                  <p class='card-text'><span class='fw-bold'>Código: </span>{{code}}</p>
+                  <p class='card-text'><span class='fw-bold'>Precio: </span>{{price}}</p>
+                  <p class='card-text'><span class='fw-bold'>Stock: </span>{{stock}}</p>
+                  <p class='card-text'><span class='fw-bold'>Categoría: </span>{{category}}</p>
+                  <p class='card-text font_id'><span class='fw-bold'>Product ID: </span>{{_id}}</p>
+                  <button class='btn btn-primary w-100' data-productid='{{_id}}'>Agregar al carrito</button>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+        
+        <div class='row mt-4'>
+          <div class='col-12'>
+            <nav aria-label='Pagination'>
+              <ul class='pagination justify-content-center'>
+                {{#if hasPrevPage}}
+                  <li class='page-item'>
+                    <a class='page-link' href='{{prevLink}}'>&laquo; Previous page</a>
+                  </li>
+                {{/if}}
+                
+                <li class='page-item active'>
+                  <span class='page-link'>Page {{currentPage}}</span>
+                </li>
+                {{#if hasNextPage}}
+                  <li class='page-item'>
+                    <a class='page-link' href='{{nextLink}}'>Next page &raquo;</a>
+                  </li>
+                {{/if}}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='/js/products/index.js'></script>
+  </body>
+</html>

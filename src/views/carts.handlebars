@@ -1,0 +1,68 @@
+
+<html>
+  <head>
+    <title>{{title}}</title>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+    <link rel='stylesheet' href='/css/{{style}}' />
+  </head>
+  <body>
+    <header class='products_header'>
+      <div class='d-flex justify-content-center align-items-center'>
+        <div class='text-center mt-2'>
+          <div>
+            <p class='font_id mb-1'><span class='fw-bold'>Cart ID: </span> <span id='cartId'>{{cartId}}</span></p>
+          </div>
+          <div class='d-flex align-items-center justify-content-center mb-2'>
+            <img class='pe-2' src='/img/cart.svg' alt='cart' />
+            <h2 class='text-center'>Carrito</h1>
+            <div class='d-flex align-items-center'>
+              <p id='cartQuantity' class='font_id m-0'>
+              </p>
+            </div>
+          </div>
+         </div>
+      </div>
+    </header>
+   
+    <div class='container p-3'>
+      <div class='section'>
+        <h3 class='text-center pb-2'>Productos en el carrito</h3>
+        <div class='table-responsive'>
+          <table class='table table-bordered table-striped'>
+            <thead>
+              <tr>
+                <th>Product ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Código</th>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each carts}}
+                {{#each this.products}}
+                  <tr>
+                    <td>{{this.productId._id}}</td>
+                    <td>{{this.productId.title}}</td>
+                    <td>{{this.productId.description}}</td>
+                    <td>{{this.productId.code}}</td>
+                    <td>{{this.productId.category}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.productId.price}}</td>
+                  </tr>
+                {{/each}}
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+        <div class='text-center mt-2 mb-4'>
+          <a class='btn btn-dark' href='http://localhost:8080/products' role='button'>Ir a Productos</a>
+        </div>
+      </div>
+    </div>
+    <script src='/socket.io/socket.io.js'></script>
+    <script src='/js/carts/index.js'></script>
+  </body>
+</html>
